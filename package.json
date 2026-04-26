@@ -1,0 +1,15 @@
+{
+  "name": "studystark-bypasser",
+  "version": "1.0.0",
+  "description": "Automated bypasser suite for StudyStark",
+  "main": "bypasser.js",
+  "author": "Stark",
+  "dependencies": {
+    "puppeteer": "^24.2.1",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
+  },
+  "scripts": {
+    "start": "node bypasser.js"
+  }
+}
