@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         StudyStark & VidyaRays Super Bypasser
 // @version      7.1
-// @description  Full automation for StudyStark verification tasks. Handles timers, scrolling, and Google redirects.
-// @author       Stark
+// @description  Restricted scope with Go Home click and strict Google matching
+// @author       Antigravity
 // @match        *://studystark.com/verify-task/*
 // @match        *://stark.vidyarays.com/*
 // @match        *://www.google.com/search*
@@ -20,7 +20,7 @@
         const statusDiv = document.createElement('div');
         statusDiv.id = 'bp-status-container';
         statusDiv.style = "position: fixed; top: 15px; right: 15px; z-index: 10000; background: #000; color: #00ffcc; padding: 15px; border-radius: 12px; font-family: sans-serif; border: 2px solid #00ffcc; box-shadow: 0 0 20px rgba(0,255,204,0.4); pointer-events: none;";
-        statusDiv.innerHTML = "<b>BYPASSER ACTIVE</b><br><span id='bp-status'>Initializing...</span>";
+        statusDiv.innerHTML = "<b>BYPASSER V7.1</b><br><span id='bp-status'>Initializing...</span>";
         document.body.appendChild(statusDiv);
     }
 
@@ -32,22 +32,28 @@
     setInterval(() => {
         const url = window.location.href;
 
+        // --- STRICT SCOPE CHECK ---
         const isVerify = url.includes('studystark.com/verify-task/');
         const isVidyarays = url.includes('stark.vidyarays.com');
+
+        // Only run on Google if the search query is exactly "Stark Vidyarays"
         const isGoogleSearch = url.includes('google.com/search');
         const isStarkSearch = url.toLowerCase().includes('q=stark+vidyarays') || url.toLowerCase().includes('q=stark%20vidyarays');
         const isTargetGoogle = isGoogleSearch && isStarkSearch;
 
+        // If not on a target page, do nothing and hide UI
         if (!isVerify && !isVidyarays && !isTargetGoogle) {
             const ui = document.getElementById('bp-status-container');
             if (ui) ui.remove();
             return;
         }
 
+        // Ensure UI is injected on target pages
         if (document.body && !document.getElementById('bp-status-container')) {
             init();
         }
 
+        // --- GOOGLE SEARCH AUTOMATION ---
         if (isTargetGoogle) {
             const results = document.querySelectorAll('a');
             for (let res of results) {
@@ -59,10 +65,11 @@
             }
         }
 
+        // --- StudyStark Pages ---
         if (isVerify) {
             const genBtn = document.querySelector('#genBtn');
             const goHomeBtn = document.querySelector('.btn-generate-big');
-            
+
             if (genBtn && genBtn.offsetParent !== null) {
                 updateStatus("Clicking Generate Access Key...");
                 genBtn.click();
@@ -72,11 +79,12 @@
             }
         }
 
+        // --- VidyaRays Verification ---
         if (isVidyarays) {
             const verifyBtn = document.querySelector('#verifyBtn');
             const proceedBtn = document.querySelector('#pleaseWait');
             const getLinkBtn = document.querySelector('#final-get-link');
-            
+
             const allElements = document.querySelectorAll('span, button, a');
             let continueBtn = null;
             for (let el of allElements) {
@@ -96,12 +104,12 @@
                 updateStatus("Found CONTINUE. Clicking...");
                 window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
                 setTimeout(() => continueBtn.click(), 500);
-            } 
+            }
             else if (proceedBtn && proceedBtn.innerText.trim().toUpperCase() === "PROCEED" && proceedBtn.offsetParent !== null) {
                 updateStatus("Step Ready! Clicking PROCEED...");
                 window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
                 setTimeout(() => proceedBtn.click(), 500);
-            } 
+            }
             else if (getLinkBtn || (Array.from(allElements).find(el => el.innerText.trim().toUpperCase() === "GET LINK" && el.offsetParent !== null))) {
                 const target = getLinkBtn || Array.from(allElements).find(el => el.innerText.trim().toUpperCase() === "GET LINK");
                 updateStatus("FINISHING! Clicking GET LINK...");
