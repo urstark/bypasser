@@ -42,6 +42,11 @@ If the Bypasser box **does not appear**, you MUST enable these Chrome settings:
 
 ---
 
+## Video tutorial
+
+https://github.com/user-attachments/assets/eda57e1d-15b8-4fa1-bd39-358fe0aa2666
+
+
 ## 💻 Alternative: Standalone Node.js Script
 
 If you prefer running the bypasser from your terminal:
