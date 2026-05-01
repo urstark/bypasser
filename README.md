@@ -14,15 +14,31 @@
 
 The easiest way to use this bypasser is via the **Tampermonkey** browser extension.
 
-1.  **Install Tampermonkey**: Get it for [Chrome](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo), [Edge](https://microsoftedge.microsoft.com/addons/detail/tampermonkey/iikmkjmpaadaobahmlepogocplenbaon), or [Firefox](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/).
-2.  **Enable Developer Mode**:
-    - Go to your browser's extension settings (e.g., `chrome://extensions`).
-    - Toggle **Developer Mode** to **ON** (Required for userscripts to run).
-3.  **Add Script**:
+1.  **Install Tampermonkey**: Get it for [Chrome](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo).
+2.  **Add Script**:
     - Click the Tampermonkey icon > **Create a new script...**
     - Copy and paste the contents of `StudyStark_Bypasser.user.js` into the editor.
     - Press `Ctrl + S` to save.
-4.  **Done!**: Visit [StudyStark Verify Task](https://studystark.com/verify-task/) and watch the magic happen.
+3.  **Done!**: Visit [StudyStark Verify Task](https://studystark.com/verify-task/) and watch the magic happen.
+
+---
+
+## 🆘 Troubleshooting (Crucial for Chrome)
+
+If the Bypasser box **does not appear**, you MUST enable these Chrome settings:
+
+### 1. Enable Developer Mode
+- Go to `chrome://extensions`
+- Toggle **Developer Mode** in the top-right corner to **ON**.
+- This is required by Chrome to allow Tampermonkey to inject scripts.
+
+### 2. Allow Access to File URLs
+- In `chrome://extensions`, find **Tampermonkey** and click **Details**.
+- Scroll down and toggle **Allow access to file URLs** to **ON**.
+- This ensures the script can run reliably across redirects.
+
+### 3. Allow User Script Execution
+- In the same **Details** page, ensure any setting related to "Allow user scripts" or "Site access" is set to "On all sites".
 
 ---
 
