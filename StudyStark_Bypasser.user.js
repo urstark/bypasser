@@ -1,16 +1,16 @@
 // ==UserScript==
 // @name         StudyStark & VidyaRays Super Bypasser
-// @version      7.1
-// @description  Restricted scope with Go Home click and strict Google matching
-// @author       Antigravity
-// @match        *://studystark.com/verify-task/*
+// @version      7.2
+// @description  Automated bypass for StudyStark tasks
+// @author       Stark
+// @match        *://studystark.com/verify-task*
 // @match        *://stark.vidyarays.com/*
 // @match        *://www.google.com/search*
 // @run-at       document-start
 // @grant        none
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
     function init() {
@@ -20,7 +20,7 @@
         const statusDiv = document.createElement('div');
         statusDiv.id = 'bp-status-container';
         statusDiv.style = "position: fixed; top: 15px; right: 15px; z-index: 10000; background: #000; color: #00ffcc; padding: 15px; border-radius: 12px; font-family: sans-serif; border: 2px solid #00ffcc; box-shadow: 0 0 20px rgba(0,255,204,0.4); pointer-events: none;";
-        statusDiv.innerHTML = "<b>BYPASSER V7.1</b><br><span id='bp-status'>Initializing...</span>";
+        statusDiv.innerHTML = "<b>BYPASSER V7.2</b><br><span id='bp-status'>Initializing...</span>";
         document.body.appendChild(statusDiv);
     }
 
@@ -32,8 +32,8 @@
     setInterval(() => {
         const url = window.location.href;
 
-        // --- STRICT SCOPE CHECK ---
-        const isVerify = url.includes('studystark.com/verify-task/');
+        // --- SCOPE CHECK ---
+        const isStudyStark = url.includes('studystark.com/verify-task');
         const isVidyarays = url.includes('stark.vidyarays.com');
 
         // Only run on Google if the search query is exactly "Stark Vidyarays"
@@ -42,7 +42,7 @@
         const isTargetGoogle = isGoogleSearch && isStarkSearch;
 
         // If not on a target page, do nothing and hide UI
-        if (!isVerify && !isVidyarays && !isTargetGoogle) {
+        if (!isStudyStark && !isVidyarays && !isTargetGoogle) {
             const ui = document.getElementById('bp-status-container');
             if (ui) ui.remove();
             return;
@@ -66,7 +66,7 @@
         }
 
         // --- StudyStark Pages ---
-        if (isVerify) {
+        if (isStudyStark) {
             const genBtn = document.querySelector('#genBtn');
             const goHomeBtn = document.querySelector('.btn-generate-big');
 
